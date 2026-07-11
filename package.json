@@ -1,20 +1,30 @@
 {
-  "name": "site",
+  "name": "how-to-thrive-not-survive",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "tinacms dev -c \"next dev --turbopack\"",
+    "build": "tinacms build && next build",
+    "build:local": "tinacms build --local --skip-cloud-checks && next build",
+    "start": "tinacms build && next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "csv-parse": "^7.0.1",
+    "date-fns": "^4.4.0",
+    "gray-matter": "^4.0.3",
     "next": "16.2.10",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tinacms": "^3.10.0",
+    "turndown": "^7.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tinacms/cli": "^2.5.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
