@@ -21,9 +21,17 @@ async function tryGetTinaPost(relativePath: string) {
     return null;
   }
 
+  // Production builds use filesystem MDX. Tina Cloud index lag must not
+  // fail prerender — visual editing still works through /admin.
+  if (process.env.VERCEL || process.env.NETLIFY || process.env.CI) {
+    return null;
+  }
+
   try {
     const { default: client } = await import("@/tina/__generated__/client");
-    return client.queries.post({ relativePath });
+    const result = await client.queries.post({ relativePath });
+    if (!result?.data?.post) return null;
+    return result;
   } catch {
     return null;
   }
